@@ -115,9 +115,35 @@ export default function Body() {
             </ul>
           </PricingBox>
 
-          <PricingBox style={{ color: "gold", backgroundColor: "rgb(253, 247, 210)" }}>
+          
+
+          <PricingBox style={{
+            color: "#dda753",
+            backgroundColor: "#fbf6ed",
+            borderColor: "#eaca98",
+            borderWidth: "2px"
+          }}>
+            <div
+            style={{ 
+              color:"white",
+              borderRadius:"20px",
+              backgroundColor:"#ed513f",
+              width: "35%",
+              textAlign: "center",
+              position:"relative",
+              top: "-50px",
+              right: "15px",
+              /* left: -5px; */
+              float: "right",
+              fontSize: "14px"
+              // display: "flex",
+            }}
+          >
+            Most Popular
+
+          </div>
             <img src={crownIcon} alt="icon" />
-            <h5 style={{ color: "gray" }}>Silver Plan</h5>
+            <h5 style={{ color: "gray" }}>Gold Plan</h5>
             <h2>
               <small style={{ textDecoration: "line-through", color: "gray" }}>
                 ₹ 2599
@@ -127,7 +153,7 @@ export default function Body() {
 
             <DevicesCont
               style={{
-                backgroundColor: "rgb(226, 206, 90)",
+                backgroundColor: "#f8e9d3",
                 borderColor: "rgb(236, 217, 106)",
               }}
             >
@@ -141,9 +167,11 @@ export default function Body() {
             </ul>
           </PricingBox>
 
-          <PricingBox style={{ color: "orange" }}>
+          
+
+          <PricingBox style={{ color: "#db641b" }}>
             <img src={crownIcon} alt="icon" />
-            <h5 style={{ color: "gray" }}>Silver Plan</h5>
+            <h5 style={{ color: "gray" }}>Diamon Plan</h5>
             <h2>
               <small style={{ textDecoration: "line-through", color: "gray" }}>
                 ₹ 4599
@@ -151,7 +179,7 @@ export default function Body() {
               ₹ 3500 / <small>Year</small>
             </h2>
 
-            <DevicesCont style={{ backgroundColor: "rgb(255, 217, 147)" }}>
+            <DevicesCont style={{ backgroundColor: "#fbefe8" }}>
               <img src={compIcon} alt="icon" /> <h5>Mobile + Desktop</h5>
             </DevicesCont>
 

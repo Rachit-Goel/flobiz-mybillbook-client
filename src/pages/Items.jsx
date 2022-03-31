@@ -199,12 +199,12 @@ export default function Items() {
     ) {
       const newItems = itemsData.filter((item) => selected !== item);
       storeItems([...newItems, formData]);
-    } 
+    }
     else {
       if (itemsData) {
         const newItems = [...itemsData, formData];
         storeItems(newItems);
-      } 
+      }
       else {
         storeItems([formData]);
       }
@@ -230,6 +230,85 @@ export default function Items() {
     setSelected({});
   };
 
+
+  function sortTable(n) {
+    // console.log("hi")
+    var table;
+    table = document.getElementById("table");
+    var rows, i, x, y, count = 0;
+    var switching = true;
+
+    // Order is set as ascending
+    var direction = "ascending";
+
+    // Run loop until no switching is needed
+    while (switching) {
+      switching = false;
+      var rows = table.rows;
+
+      //Loop to go through all rows
+      for (i = 1; i < (rows.length - 1); i++) {
+        var Switch = false;
+
+        // Fetch 2 elements that need to be compared
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+
+        // Check the direction of order
+        if (direction == "ascending") {
+
+          // Check if 2 rows need to be switched
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If yes, mark Switch as needed and break loop
+            Switch = true;
+            break;
+          }
+        } else if (direction == "descending") {
+
+          // Check direction
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            // If yes, mark Switch as needed and break loop
+            Switch = true;
+            break;
+          }
+        }
+      }
+      if (Switch) {
+        // Function to switch rows and mark switch as completed
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+
+        // Increase count for each switch
+        count++;
+      } else {
+        // Run while loop again for descending order
+        if (count == 0 && direction == "ascending") {
+          direction = "descending";
+          switching = true;
+        }
+      }
+    }
+  }
+
+  function search() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+
   return (
     <>
       <ItemsNav />
@@ -240,15 +319,28 @@ export default function Items() {
             <SearchContainer>
               <img src={searchIcon} alt="icon" />
               {/* <InputSearch> */}
-              <Input id="search" type="search" placeholder={"Search Items"} 
-                style={{paddingLeft: "40px", width: "max-content"}}
+              <Input id="search" type="search" placeholder={"Search Items"}
+                style={{ paddingLeft: "40px", width: "max-content" }}
+                onKeyUp={()=>{search()}}
               />
               {/* </InputSearch> */}
             </SearchContainer>
-            <TableItems>
+            <TableItems
+            id="table"
+            >
               <thead>
                 <tr>
-                  <th>ITEM NAME</th>
+                  <th>
+                   <div style={{display: "flex", flexDirection: "row"}}>
+                      ITEM NAME
+                    <div onClick={() => {sortTable(0)}} style={{ marginLeft: "4px" }}>
+                      <i class="fa fa-sort" style={{ fontSize: "14px" }}>
+                      </i>
+                    </div>
+                   </div>
+                  
+                    
+                  </th>
                   <th>ITEM CODE</th>
                   <th>SELLING PRICE</th>
                   <th>PURCHASE PRICE</th>
@@ -258,38 +350,38 @@ export default function Items() {
                 </tr>
               </thead>
               <tbody>
-                {itemsData && itemsData.length > 0 ? 
-                (
-                  itemsData.map((item, key) => {
-                    return (
-                      <>
-                        <tr
-                          key={key}
-                          onClick={() => {
-                            editItem(item);
-                          }}
-                        >
-                          <td>{item.itemName}</td>
-                          <td>{item.itemCode}</td>
-                          <td>{item.sprice}</td>
-                          <td>{item.pprice}</td>
-                          <td>{item.munit}</td>
-                          <td>{item.sdate}</td>
-                          <td>
-                            <button
-                              onClick={() => removeItem(item)}
-                              style={{ color: "red" }}
-                            >
-                              X
-                            </button>
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })
-                ) : (
-                  <></>
-                )}
+                {itemsData && itemsData.length > 0 ?
+                  (
+                    itemsData.map((item, key) => {
+                      return (
+                        <>
+                          <tr
+                            key={key}
+                            onClick={() => {
+                              editItem(item);
+                            }}
+                          >
+                            <td>{item.itemName}</td>
+                            <td>{item.itemCode}</td>
+                            <td>{item.sprice}</td>
+                            <td>{item.pprice}</td>
+                            <td>{item.munit}</td>
+                            <td>{item.sdate}</td>
+                            <td>
+                              <button
+                                onClick={() => removeItem(item)}
+                                style={{ color: "red" }}
+                              >
+                                X
+                              </button>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
               </tbody>
             </TableItems>
             {itemsData && itemsData.length < 1 && (

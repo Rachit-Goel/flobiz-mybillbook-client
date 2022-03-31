@@ -5,28 +5,32 @@ import UserStorage from "../utils/userStorage";
 import { otpRequest, loginAuthRequest } from "../services/requestMethods";
 
 const Wrapper = styled.div`
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around; */
+  /* margin: 0 auto; */
+  max-width: 500px;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 30px 50px;
+  align-items: flex-start;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   max-width: 500px;
-  padding: 30px 50px;
+  padding: 30px 30px;
+  width: 80%;
   h1 {
   color: #3d3d3d;
   font-family: sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
-  padding: 10px;
-  text-align: center;
+  /* padding: 10px; */
+  /* text-align: center; */
 }
 `;
 const Label = styled.label`

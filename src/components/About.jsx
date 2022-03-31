@@ -28,6 +28,7 @@ const FormStyle = styled.div`
   margin-right: 200px;
   border: 1px solid lightgray;
   border-radius: 10px;
+  width: 25%;
 `;
 
 export default function About() {
