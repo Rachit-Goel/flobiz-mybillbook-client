@@ -234,7 +234,7 @@ export default function Items() {
     // console.log("hi")
     var table;
     table = document.getElementById("table");
-    var rows, i, x, y, count = 0;
+    var i, x, y, count = 0;
     var switching = true;
 
     // Order is set as ascending
@@ -254,7 +254,7 @@ export default function Items() {
         y = rows[i + 1].getElementsByTagName("TD")[n];
 
         // Check the direction of order
-        if (direction == "ascending") {
+        if (direction === "ascending") {
 
           // Check if 2 rows need to be switched
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
@@ -262,7 +262,7 @@ export default function Items() {
             Switch = true;
             break;
           }
-        } else if (direction == "descending") {
+        } else if (direction === "descending") {
 
           // Check direction
           if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
@@ -281,7 +281,7 @@ export default function Items() {
         count++;
       } else {
         // Run while loop again for descending order
-        if (count == 0 && direction == "ascending") {
+        if (count === 0 && direction === "ascending") {
           direction = "descending";
           switching = true;
         }
@@ -318,7 +318,7 @@ export default function Items() {
             <SearchContainer>
               <img src={searchIcon} alt="icon" />
               {/* <InputSearch> */}
-              <Input id="search" type="search" placeholder={"Search Items"}
+              <Input id="search" placeholder={"Search Items"}
                 style={{ paddingLeft: "40px", width: "max-content" }}
                 onKeyUp={()=>{search()}}
               />
