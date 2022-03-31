@@ -21,7 +21,7 @@ export const otpRequest = async (mobileNo) => {
     }
   } catch (err) {
     alert(err.response.data.error);
-    // console.log(err.response);
+    console.log(err.response);
   }
 };
 
