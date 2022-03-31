@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import searchIcon from "../assets/icn_search 1.svg";
-// import noItemsIcon from "../assets/no_items.svg";
 import ItemStorage from "../utils/itemStorage";
 import ItemsNav from "../components/ItemsNav";
 
-const Itemscontainer = styled.div`
+const Container = styled.div`
   display: flex;
   background-color: white;
   height: 100%;
@@ -312,7 +311,7 @@ export default function Items() {
   return (
     <>
       <ItemsNav />
-      <Itemscontainer>
+      <Container>
         <Itemlist>
           <h4>Items</h4>
           <ItemsListContainer>
@@ -386,7 +385,6 @@ export default function Items() {
             </TableItems>
             {itemsData && itemsData.length < 1 && (
               <NodataIcon>
-                {/* <img src={noItemsIcon} alt="nodata" /> */}
                 <p>You do not have any data to display</p>
               </NodataIcon>
             )}
@@ -481,7 +479,7 @@ export default function Items() {
             </Form>
           </CreateItemContainer>
         </Itemcreate>
-      </Itemscontainer>
+      </Container>
     </>
   );
 }
