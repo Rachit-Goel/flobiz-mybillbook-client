@@ -24,25 +24,25 @@ const Form = styled.form`
   padding: 30px 30px;
   width: 80%;
   h1 {
-  color: #3d3d3d;
-  font-family: sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 24px;
-  /* padding: 10px; */
-  /* text-align: center; */
-}
+    color: #3d3d3d;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    /* padding: 10px; */
+    /* text-align: center; */
+  }
 `;
 const Label = styled.label`
-    color: gray;
-    display: block;
-    font-family: sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 5px;
+  color: gray;
+  display: block;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
 `;
 const Input = styled.input`
-    border: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 10px;
@@ -62,6 +62,28 @@ const SubmitInput = styled.input`
 `;
 
 function Login() {
+  
+  let timerOn = true;
+  function timer(remaining) {
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+    document.getElementById("timer").innerHTML = m + ":" + s;
+    remaining -= 1;
+
+    if (remaining >= 0 && timerOn) {
+      setTimeout(function () {
+        timer(remaining);
+      }, 1000);
+      return;
+    }
+    if (!timerOn) {
+      return;
+    }
+    alert("Timeout for otp");
+  }
+
   const { storeData } = UserStorage();
   const [otpcode, setOtpcode] = useState(false);
   const [mobileNumber, setMobileNumber] = useState();
@@ -70,19 +92,20 @@ function Login() {
   const loginRequest = async (event) => {
     event.preventDefault();
     if (otpcode && otp) {
-        const res = await loginAuthRequest(mobileNumber, otp);
-        if (!res.data.error) {
-          storeData(res.data);
-        }
-    } 
-    else {
+      const res = await loginAuthRequest(mobileNumber, otp);
+      if (!res.data.error) {
+        storeData(res.data);
+      }
+    } else {
       const res = await otpRequest(mobileNumber);
       if (!res.data.error) {
         setOtpcode(true);
         document.getElementById("otp").style.display = "block";
+        timer(120);
       }
     }
   };
+
 
   return (
     <Wrapper>
@@ -109,14 +132,13 @@ function Login() {
               onChange={(OTP) => setOtp(OTP.target.value)}
             />
           </Label>
-          <small>Resend OTP in {} Seconds</small>
+          <small>
+            Resend OTP in <span id="timer" style={{fontWeight:"bold"}}></span> Seconds
+          </small>
         </div>
 
         <div>
-          <SubmitInput
-            type="submit"
-            value={otpcode ? "Verify" : "Login"}
-          />
+          <SubmitInput type="submit" value={otpcode ? "Verify" : "Login"} />
         </div>
       </Form>
     </Wrapper>

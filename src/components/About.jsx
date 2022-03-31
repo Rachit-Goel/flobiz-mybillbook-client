@@ -56,6 +56,11 @@ export default function About() {
           <Login />
         </FormStyle>
       </Container>
+      <div style={{
+      height:"4px",
+      width: "200px",
+      backgroundColor: "#e17b5f"
+    }}></div>
     </>
   );
 }

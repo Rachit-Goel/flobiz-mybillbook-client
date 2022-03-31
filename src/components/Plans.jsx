@@ -32,6 +32,10 @@ const PricingBox = styled.div`
   img,h2,h5,h4,ul {
     margin-left: 10px;
   }
+  li{
+    padding-top: 10px;
+    list-style-image: url("https://user-images.githubusercontent.com/62262069/161159476-a50acc90-cdfb-4b41-9911-ae5b89ed5a65.png");
+  }
 `;
 const DevicesCont = styled.div`
   display: flex;

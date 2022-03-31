@@ -92,7 +92,7 @@ export default function Footer() {
           </SocialContainer1>
         </Fsection>
 
-        <Fsection>
+        <Fsection style={{ width: "368px"}}>
           <h3>Information</h3>
 
           <FooterMenu>

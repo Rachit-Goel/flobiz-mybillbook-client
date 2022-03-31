@@ -7,6 +7,9 @@ const Stats = styled.div`
   justify-content: space-around;
   color: #e17b5f;
   margin-bottom: 50px;
+  p{
+    color: grey;
+  }
 `;
 const StatData = styled.div`
   align-content: center;

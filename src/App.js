@@ -23,7 +23,7 @@ const App = () => {
               } 
             />
 
-            <Route path="/items" element={
+            <Route exact path="/items" element={
                 isToken ? <Items /> : <Navigate replace to="/" />
               } 
             />
